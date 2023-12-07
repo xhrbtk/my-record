@@ -6,6 +6,7 @@ let recordList = reactive([])
 let nameText = ref('')
 const startRecord = () => {
     console.log('开始录音')
+    audioData = []
     navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
             // 创建媒体记录
             mediaRecorder = new MediaRecorder(stream);
@@ -15,7 +16,7 @@ const startRecord = () => {
             mediaRecorder.addEventListener('dataavailable', ev => {
             // 把数据块添加到数组
             audioData.push(ev.data)
-            let blob = new Blob(audioData, { 'type' : 'audio/ogg; codecs=opus' })
+            let blob = new Blob(audioData, { 'type' : 'audio/wav; codecs=opus' })
             const url = URL.createObjectURL(blob)
             recordList.push({ name: new Date(), url: url })
             console.log('recordList', recordList)
@@ -42,6 +43,7 @@ const playRecord = () => {
 </script>
 
 <template>
+  <audio src="blob:http://localhost:5175/32205de5-f491-4de7-b658-823fd8fbd879" controls></audio>
   <input class="nameInput" v-model="nameText" placeholder="请输入">
   <div class="wrapper">
     <button class="startBtn btn" @click="startRecord">开始录音</button>
