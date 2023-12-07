@@ -43,7 +43,6 @@ const playRecord = () => {
 </script>
 
 <template>
-  <audio src="blob:http://localhost:5175/32205de5-f491-4de7-b658-823fd8fbd879" controls></audio>
   <input class="nameInput" v-model="nameText" placeholder="请输入">
   <div class="wrapper">
     <button class="startBtn btn" @click="startRecord">开始录音</button>
